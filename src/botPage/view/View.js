@@ -316,41 +316,68 @@ const checkForRequiredBlocks = () => {
 export default class View {
     constructor() {
         logHandler();
-        this.initPromise = new Promise(resolve => {
-            updateConfigCurrencies(api).then(() => {
-                symbolPromise.then(() => {
-                    updateTokenList();
+        this.initPromise = new Promise((resolve, reject) => {
+            updateConfigCurrencies(api)
+                .then(() => {
+                    symbolPromise
+                        .then(() => {
+                            updateTokenList();
 
-                    if (
-                        isLoggedin() &&
-                        isOptionsBlocked(
-                            localStorage.getItem('residence')
-                            // localStorage.getItem('landingCompany') === 'maltainvest'
-                            // this condition is commented because the MF accounts should be redirected to deriv))
-                        )
-                    ) {
-                        this.showHeader(getStorage('showHeader') !== 'false');
-                        this.setElementActions();
-                        renderErrorPage();
-                        resolve();
-                    } else {
-                        this.blockly = new _Blockly();
-                        this.blockly.initPromise.then(() => {
-                            document
-                                .getElementById('contact-us')
-                                .setAttribute('href', `https://www.binary.com/${getLanguage()}/contact.html`);
-                            this.setElementActions();
-                            initRealityCheck(() => $('#stopButton').triggerHandler('click'));
-                            applyToolboxPermissions();
-                            moveToDeriv();
+                            if (
+                                isLoggedin() &&
+                                isOptionsBlocked(
+                                    localStorage.getItem('residence')
+                                    // localStorage.getItem('landingCompany') === 'maltainvest'
+                                    // this condition is commented because the MF accounts should be redirected to deriv))
+                                )
+                            ) {
+                                this.showHeader(getStorage('showHeader') !== 'false');
+                                this.setElementActions();
+                                renderErrorPage();
+                                resolve();
+                            } else {
+                                this.blockly = new _Blockly();
+                                this.blockly.initPromise
+                                    .then(() => {
+                                        document
+                                            .getElementById('contact-us')
+                                            .setAttribute(
+                                                'href',
+                                                `https://www.binary.com/${getLanguage()}/contact.html`
+                                            );
+                                        this.setElementActions();
+                                        initRealityCheck(() => $('#stopButton').triggerHandler('click'));
+                                        applyToolboxPermissions();
+                                        moveToDeriv();
+                                        renderReactComponents();
+                                        if (!getTokenList().length) updateLogo();
+                                        this.showHeader(getStorage('showHeader') !== 'false');
+                                        resolve();
+                                    })
+                                    .catch(error => {
+                                        console.error('Blockly initialization error:', error);
+                                        // Ensure page is visible even on error
+                                        renderReactComponents();
+                                        this.showHeader(getStorage('showHeader') !== 'false');
+                                        reject(error);
+                                    });
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Symbol promise error:', error);
+                            // Ensure page is visible even on error
                             renderReactComponents();
-                            if (!getTokenList().length) updateLogo();
                             this.showHeader(getStorage('showHeader') !== 'false');
-                            resolve();
+                            reject(error);
                         });
-                    }
+                })
+                .catch(error => {
+                    console.error('Config currencies error:', error);
+                    // Ensure page is visible even on error
+                    renderReactComponents();
+                    this.showHeader(getStorage('showHeader') !== 'false');
+                    reject(error);
                 });
-            });
         });
     }
 

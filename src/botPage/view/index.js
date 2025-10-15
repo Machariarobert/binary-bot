@@ -26,20 +26,36 @@ require('trackjs');
 
 const view = new View();
 
-view.initPromise.then(() => {
-    $('.show-on-load').show();
-    $('.barspinner').hide();
-    window.dispatchEvent(new Event('resize'));
-    Elevio.init();
-    GTM.init();
-    if (trackJs) {
-        trackJs.configure({
-            userId: $('.account-id')
-                .first()
-                .text(),
-        });
-    }
-});
+view.initPromise
+    .then(() => {
+        $('.show-on-load').show();
+        $('.barspinner').hide();
+        window.dispatchEvent(new Event('resize'));
+        Elevio.init();
+        GTM.init();
+        if (trackJs) {
+            trackJs.configure({
+                userId: $('.account-id')
+                    .first()
+                    .text(),
+            });
+        }
+    })
+    .catch(error => {
+        console.error('View initialization failed:', error);
+        // Ensure UI is visible even on error
+        $('.show-on-load').show();
+        $('.barspinner').hide();
+        // Make sure bot-main is visible
+        const botMain = document.getElementById('bot-main');
+        if (botMain && botMain.classList.contains('hidden')) {
+            botMain.classList.remove('hidden');
+        }
+        const toolbox = document.getElementById('toolbox');
+        if (toolbox && toolbox.classList.contains('hidden')) {
+            toolbox.classList.remove('hidden');
+        }
+    });
 
 if (!isBinaryDomain) {
     // eslint-disable-next-line no-unused-expressions
