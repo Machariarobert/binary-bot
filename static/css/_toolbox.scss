@@ -1,10 +1,11 @@
 @mixin toolbox-button-base {
     background-color: $brand-gray;
-    color: $black;
+    color: #ffffff;
     padding: 0em;
     width: 40px;
     height: 40px;
     font-size: 1.500em;
+    border: none;
 }
 
 @mixin toolbox-button-focus {
@@ -18,14 +19,16 @@
 
 @mixin toolbox-runButton-hover {
     background-color: $toolbox-btn-active;
+    border-color: $brand-accent;
+    color: $white;
 }
 
 #toolbox {
     background-color: $brand-gray;
-    border-bottom: 1px solid $brand-dark-gray;
     padding: 2px 3px;
     z-index: 0;
     overflow: auto;
+    width: 100%;
 
     #runButton[disabled], #runButton[disabled]:hover, #stopButton[disabled], #stopButton[disabled] {
         @include toolbox-runButton-disabled;
@@ -48,7 +51,7 @@
     }
 
     .toolbox-separator {
-        background-color: $brand-dark-gray;
+        background-color: $border-dark;
         display: inline-block;
         height: 15px;
         margin: 0 5px;
@@ -60,6 +63,17 @@
 #toolbox-login {
     margin-top: 1px;
     margin-right: 20px;
+}
+
+// Toggle toolbox button - only show on mobile
+#toggleToolboxButton {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    #toggleToolboxButton {
+        display: inline-block;
+    }
 }
 
 #toolbox-account {
@@ -74,9 +88,10 @@
     vertical-align: middle;
     padding-right: 20px;
     &>a {
-        color: $black;
+        color: $light-text;
         &:hover, &:visited {
             text-decoration: none;
+            color: $brand-accent;
         }
     }
 }

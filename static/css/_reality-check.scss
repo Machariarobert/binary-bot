@@ -5,7 +5,10 @@
     width: 96%;
     padding-bottom: 0.5em;
     left: 2%;
-    background-color: white;
+    background-color: $brand-gray;
+    border: 2px solid $brand-accent;
+    box-shadow: 0 0 2em 0 rgba(255, 0, 0, 0.5);
+    color: $light-text;
     z-index: 9999;
     border-radius: 0.1em;
 

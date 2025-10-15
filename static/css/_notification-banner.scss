@@ -2,6 +2,7 @@
 
 .notification-banner {
   background-color: $brand-gray;
+  border: 1px solid $border-dark;
   display: flex;
   flex-direction: row;
   max-width: 940px;
@@ -16,7 +17,7 @@
 
   &__orange-hexagon {
     display: none;
-    border-bottom: 130px solid $brand-orange;
+    border-bottom: 130px solid $brand-accent;
     border-left: 0 solid transparent;
     border-right: 45px solid transparent;
     height: 0;
@@ -34,12 +35,14 @@
       margin-bottom: 4px;
       line-height: 24px;
       font-size: 16px;
+      color: $light-text;
     }
     &_text {
       margin: 0;
       font-weight: 400;
       line-height: 24px;
       font-size: 16px;
+      color: $light-text;
     }
     &_button {
       text-decoration: none;

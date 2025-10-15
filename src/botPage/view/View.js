@@ -192,13 +192,7 @@ const getLandingCompanyForToken = id => {
 };
 
 const updateLogo = token => {
-    $('.binary-logo-text > img').attr('src', '');
-    const currentLandingCompany = getLandingCompanyForToken(token);
-    if (currentLandingCompany === 'maltainvest') {
-        $('.binary-logo-text > img').attr('src', `${isBinaryDomain && './image/binary-type-logo.svg'}`);
-    } else {
-        $('.binary-logo-text > img').attr('src', `${isBinaryDomain && './image/binary-style/logo/type.svg'}`);
-    }
+    $('.logo-parent img').attr('src', './image/banner.png');
     setTimeout(() => window.dispatchEvent(new Event('resize')));
 };
 
@@ -582,6 +576,18 @@ export default class View {
         $('#showSummary').click(showSummary);
 
         $('#toggleHeaderButton').click(() => this.showHeader($('#header').is(':hidden')));
+
+        $('#toggleToolboxButton').click(() => {
+            const blocklyDiv = document.getElementById('blocklyDiv');
+
+            if (blocklyDiv && blocklyDiv.firstChild) {
+                const injectionDiv = blocklyDiv.firstChild;
+                const blocklyToolboxDiv = injectionDiv.firstChild;
+                if (blocklyToolboxDiv && blocklyToolboxDiv.classList) {
+                    blocklyToolboxDiv.classList.toggle('hidden');
+                }
+            }
+        });
 
         $('#logout, #toolbox-logout').click(() => {
             saveBeforeUnload();

@@ -32,7 +32,7 @@ body {
 }
 
 #bot-main{
-    background: $hero-BG url(../image/BG-1.webp) no-repeat !important;
+    background: $darker-bg !important;
     background-size: cover !important;
     position: absolute;
     height: 100%;
@@ -118,18 +118,16 @@ body {
 #header {
     height: 81px;
     width: 100%;
-    background-color: $brand-blue;
-    border-top: 2px solid $brand-dark-blue;
-    border-bottom: 4px solid $brand-orange;
+    background-color: $brand-dark-gray;
     font-size: 18px;
     padding: 0 20px;
     z-index: 0;
 }
 
 #topbar {
-    background-color: $brand-primary-dark;
+    background-color: $brand-dark-blue;
     width: 100%;
-    color: $white;
+    color: $light-text;
     line-height: 1;
     font-size: 70%;
     text-align: right;
@@ -195,9 +193,9 @@ body {
     z-index: 1000;
     display: none;
     top: 0em;
-    opacity: 0.1;
+    opacity: 0.8;
     left: 0em;
-    background: black;
+    background: $brand-dark-blue;
 }
 
 #stopButton, #summaryStopButton {
