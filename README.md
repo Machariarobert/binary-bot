@@ -72,11 +72,11 @@ Make sure to set the endpoint for running the application on the localhost
    For this, Go to ```http://localbot.binary.sx/endpoint.html```. Make sure the Server is set to ```blue.binaryws.com``` and O Auth App ID is ```16014```
    Click submit.
    
-2.  Navigate to ```http://localbot.binary.sx/bot.html``` (Note that the protocol is ```http``` and not ```https```)
+2.  Navigate to ```http://localbot.binary.sx``` or ```http://localbot.binary.sx/bot.html``` - The bot page is now the main landing page! (Note that the protocol is ```http``` and not ```https```)
 
-    >**Note:** - [Getting error "This site can’t be reached" on localhost](#q3)
+    >**Note:** - [Getting error "This site can't be reached" on localhost](#q3)
 
-3. And now you are ready with your setup.Login to the binary account using the Binary.com account credentials. Run the bot
+3. And now you are ready with your setup. Login to the binary account using the Binary.com account credentials. Run the bot
 
 
 ## Pushing changes to github
