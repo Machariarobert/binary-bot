@@ -844,40 +844,23 @@ function renderReactComponents() {
     // eslint-disable-next-line no-unused-vars
     getComponent();
     $('.barspinner').show();
-    const bannerToken = getStorage('setDueDateForBanner');
-    const qs = parseQueryString();
-    if (new Date().getTime() > Number(bannerToken)) {
-        remove('setDueDateForBanner');
-        const getDefaultPath = window.location.href.replace(/\/bot(\.html)?/, serialize(qs));
-        window.location.replace(getDefaultPath);
-        return false;
-    }
-    if (bannerToken === null || bannerToken === undefined) {
-        const getDefaultPath = window.location.href.replace(/\/bot(\.html)?/, serialize(qs));
-        window.location.replace(getDefaultPath);
-        document.getElementById('errorArea').remove();
-        $('.barspinner').hide();
-    } else {
-        setTimeOutBanner('views');
-        render(<ServerTime api={api} />, $('#server-time')[0]);
-        render(<Tour />, $('#tour')[0]);
-        render(
-            <OfficialVersionWarning
-                show={
-                    !(
-                        typeof window.location !== 'undefined' &&
-                        isProduction() &&
-                        window.location.pathname.includes('/bot')
-                    )
-                }
-            />,
-            $('#footer')[0]
-        );
-        document.getElementById('errorArea').remove();
-        render(<TradeInfoPanel api={api} />, $('#summaryPanel')[0]);
-        render(<LogTable />, $('#logTable')[0]);
-        document.getElementById('bot-main').classList.remove('hidden');
-        document.getElementById('toolbox').classList.remove('hidden');
-        $('.barspinner').hide();
-    }
+    // Removed banner token check - allow permanent access
+    // Always render bot components without redirect
+    render(<ServerTime api={api} />, $('#server-time')[0]);
+    render(<Tour />, $('#tour')[0]);
+    render(
+        <OfficialVersionWarning
+            show={
+                !(typeof window.location !== 'undefined' && isProduction() && window.location.pathname.includes('/bot'))
+            }
+        />,
+        $('#footer')[0]
+    );
+    const errorArea = document.getElementById('errorArea');
+    if (errorArea) errorArea.remove();
+    render(<TradeInfoPanel api={api} />, $('#summaryPanel')[0]);
+    render(<LogTable />, $('#logTable')[0]);
+    document.getElementById('bot-main').classList.remove('hidden');
+    document.getElementById('toolbox').classList.remove('hidden');
+    $('.barspinner').hide();
 }

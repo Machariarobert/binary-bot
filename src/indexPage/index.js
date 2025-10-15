@@ -58,25 +58,9 @@ export const getComponent = () => {
     };
 };
 export const setTimeOutBanner = route => {
-    let bannerDisplayed;
-    const qs = parseQueryString();
-    // eslint-disable-next-line consistent-return
-    timerForBanner = setTimeout(() => {
-        if (
-            (route === 'index' && !!bannerDisplayed === false) ||
-            (route === 'views' && checkifBotRunning() === false)
-        ) {
-            const getDefaultPath = window.location.href.replace(/\/bot(\.html)?/, serialize(qs));
-            window.location.replace(getDefaultPath);
-            renderBanner();
-        } else if (
-            (route === 'index' && !!bannerDisplayed === true) ||
-            (route === 'views' && checkifBotRunning() === true)
-        ) {
-            remove('setDueDateForBanner');
-            return false;
-        }
-    }, calcSetTimeoutValueBanner);
+    // Timer disabled - no automatic redirects after 7 days
+    // Users can stay on bot page indefinitely
+    
 };
 
 export const renderBanner = () => {

@@ -15,15 +15,9 @@ const setDueDateAgain = () => {
 }
 
 const renderBanner = () => {
-    const getqueryParameter = document.location.search;
-    const getDefaultPath = window.location.href.replace(/\/bot(\.html)?/, getqueryParameter);
-    window.location.replace(getDefaultPath);
-    render(<ModalComponent />, document.getElementById('bot-landing-alert-popup'));
-    render(<BotLanding />, document.getElementById('bot-landing'));
-    elements.map(elem => document.querySelector(elem).classList.add('hidden'));
-    document.getElementById('bot-landing').classList.remove('hidden');
-    document.getElementById('bot-main').classList.remove('hidden');
-    $('.barspinner').hide();
+    // Redirect disabled - users stay on bot page
+    // Just close the modal without redirecting
+    return;
 }
 
 const ModalComponent = () => (
