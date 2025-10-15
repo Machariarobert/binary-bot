@@ -192,7 +192,7 @@ const getLandingCompanyForToken = id => {
 };
 
 const updateLogo = token => {
-    $('.logo-parent img').attr('src', './image/banner.png');
+    $('.logo-parent img').attr('src', '/image/banner.png');
     setTimeout(() => window.dispatchEvent(new Event('resize')));
 };
 
