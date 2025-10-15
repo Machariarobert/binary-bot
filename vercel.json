@@ -1,4 +1,7 @@
 {
   "buildCommand": "npm run build-min",
-  "outputDirectory": "www"
+  "outputDirectory": "www",
+  "rewrites": [
+    { "source": "/", "destination": "/bot.html" }
+  ]
 }
