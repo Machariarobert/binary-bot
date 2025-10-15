@@ -1,16 +1,4 @@
 {
   "buildCommand": "npm run build-min",
-  "outputDirectory": "www",
-  "redirects": [
-    { 
-      "source": "/",
-      "destination": "/bot.html",
-      "permanent": false
-    },
-    { 
-      "source": "/index.html",
-      "destination": "/bot.html",
-      "permanent": false
-    }
-  ]
+  "outputDirectory": "www"
 }

@@ -1,35 +1,178 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta http-equiv="refresh" content="0; url=bot.html">
-	<script type="text/javascript">
-		// Immediate redirect to bot.html - landing page removed
-		window.location.replace('bot.html');
-	</script>
-	<title>Binary Bot - Redirecting...</title>
-	<style>
-		body {
-			font-family: Arial, sans-serif;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			height: 100vh;
-			margin: 0;
-			background: #f5f5f5;
-		}
-		.redirect-message {
-			text-align: center;
-			padding: 40px;
-			background: white;
-			border-radius: 8px;
-			box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-		}
-	</style>
+    {{> ../templates/partials/security }} {{> ../templates/partials/head }}
+    <title>Binary Bot</title>
+    {{> bundle_css }}
+    <link rel="stylesheet" href="css/binary.css">
+    {{> bot_css }}
 </head>
+
 <body>
-	<div class="redirect-message">
-		<h2>Redirecting to Binary Bot...</h2>
-		<p>If you are not redirected automatically, <a href="bot.html">click here</a>.</p>
-	</div>
+    <div id="bot-main" class="hidden" style="width: 100%;position: relative;height: 100%;">
+    <div id="tour"></div>
+    <div id="center"></div>
+    <div id="workspace_center"></div>
+    <span id="limits-dialog"></span>
+    <span id="load-dialog"></span>
+    <span id="save-dialog"></span>
+    <span id="integrations-dialog"></span>
+    <span id="chart-dialog"></span>
+    <span id="trading-view-dialog"></span>
+    <span id="logPanel" class="draggable-dialog" data-i18n-title="Log">
+        <div id="logTable" class="logTable-scroll"></div>
+    </span>
+    <span id="summaryPanel" class="draggable-dialog" data-i18n-title="Summary"></span>
+    <div id="bot-landing-alert-popup" class="bot-landing-alert-popup"></div>
+    <div>
+        <div class="blocker"></div>
+        <div class="reality-check" style="display: none">
+            <h1 data-i18n-text="Reality Check"></h1>
+            <p
+                data-i18n-text="Options trading can become a real addiction, as can any other activity pushed to its limits. To avoid the danger of such an addiction, we provide a reality-check that gives you a summary of your trades and accounts on a regular basis.">
+            </p>
+            <p data-i18n-text="Please specify your preferred reality-check interval in minutes">
+                <input id="realityDuration" interval="1" maxlength="2" value="10">
+            </p>
+            <p id="rc-err" style="display: none;" class="error-msg"
+                data-i18n-text="Please enter a number between 10 to 60."></p>
+            <div>
+                <button bcont="1" class="button" id="continue-trading" data-i18n-text="Continue Trading"></button>
+                <a id="statement-reality-check" class="button-secondary" href="#">
+                    <span data-i18n-text="Statement"></span>
+                </a>
+                <a id="logout-reality-check" class="button-secondary" href="#">
+                    <span data-i18n-text="Log out"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    {{> ../templates/partials/loading }}
+    <div id="topbar">
+        <div class="right-header show-on-load">
+            {{> ../templates/partials/language }}
+        </div>
+        <div id="server-status" class="right-header"></div>
+        <a id="contact-us" class="right-header" target="_blank" href="https://www.binary.com/en/contact.html"
+            data-i18n-text="Contact us"></a>
+        <div id="server-time" class="right-header"></div>
+    </div>
+    <div id="header" style="display: none;">
+        <div class="left-header">
+            <div class="logo-wrapper">
+                <a href="https://www.binary.com" target="blank" id="logo">
+                    <div class="logo-parent">
+                        <div class="logo">
+                            <img class="responsive" src="{{> binary_style_img }}/logo/symbol.svg" alt="Binary logo" />
+                        </div>
+                        <div class="binary-logo-text">
+                            <img class="responsive" src="" alt="">
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div id="moving-banner"></div>
+        {{> ../templates/partials/bbot-to-deriv-banner }}
+        <div class="right-header show-on-load">
+            <div class="intro-login-logout">
+                <div id="account-list">
+                    <div id="main-logout">
+                        <ul id="main-account" class="nav-menu main-nav">
+                            <li class="account">
+                                <a href="javascript:;">
+                                    <div class="main-account">
+                                        <div class="account-type"></div>
+                                        <div class="account-id"></div>
+                                        <div class="topMenuBalance">&ensp;</div>
+                                    </div>
+                                    <div class="nav-caret"></div>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul id="all-accounts" class="nav-menu main-nav">
+                            <li class="account">
+                                <a href="javascript:;">
+                                    <div class="main-account">
+                                        <div class="account-type"></div>
+                                        <div class="account-id"></div>
+                                        <div class="topMenuBalance">&ensp;</div>
+                                    </div>
+                                    <div class="nav-caret"></div>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="separator-line-thin-gray"></div>
+                        <ul class="login-id-list"></ul>
+                    </div>
+                    <div class="separator-line-thin-gray"></div>
+                    <a id="logout" href="javascript:;" class="logout">
+                        <li>
+                            <span data-i18n-text="Log out"></span>
+                        </li>
+                    </a>
+                </div>
+                <a id="login" class="button button-secondary" href="javascript:;"></a>
+            </div>
+        </div>
+    </div>
+    <div id="blocklyArea">
+        <div id="toolbox">
+            <div class="toolbox-button icon-home" id="homeButton"></div>
+            <div class="toolbox-button icon-settings" id="integrations"></div>
+            <div class="toolbox-button icon-refresh hidden" id="resetButton"></div>
+            <div class="toolbox-button icon-save" id="saveButton"></div>
+            <div class="toolbox-button icon-open" id="loadButton"></div>
+            <div class="toolbox-separator"></div>
+            <button class="toolbox-button icon-undo" id="undoButton"></button>
+            <button class="toolbox-button icon-redo" id="redoButton"></button>
+            <button class="toolbox-button icon-zoom-in" id="zoomInButton"></button>
+            <button class="toolbox-button icon-zoom-out" id="zoomOutButton"></button>
+            <button class="toolbox-button icon-rearrange" id="rearrangeButton"></button>
+            <div class="toolbox-separator"></div>
+            <button class="toolbox-button icon-run" id="runButton"></button>
+            <button class="toolbox-button icon-stop" id="stopButton"></button>
+            <button class="toolbox-button icon-info" id="showSummary"></button>
+            <button class="toolbox-button icon-log" id="logButton"></button>
+            <div class="toolbox-separator"></div>
+            <span class="toolbox-button" id="changeHeader">
+                <span data-i18n-text="Show header" class="icon-hide-header"></span>
+            </span>
+            <a id="toolbox-login" style="display: none;" class="button button-secondary" href="javascript:;"></a>
+            <div id="toolbox-account" style="display: none;">
+                <div class="account-type"></div>
+                <div class="account-id"></div>
+                <div class="topMenuBalance">&ensp;</div>
+            </div>
+            <div class="toolbox-separator"></div>
+            <a id="toolbox-logout" style="display: none;" href="javascript:;">
+                <span data-i18n-text="Log out" class="toolbox-button"></span>
+            </a>
+        </div>
+        <div id="blocklyDiv"></div>
+    </div>
+    </div>
+    <div id="footer"></div>
+    <div id="errorArea"></div>
+    <audio id="win-sound" autostart="false" preload="auto">
+        <source src="sound/you-won.ogg" type="audio/ogg" />
+        <source src="sound/you-won.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="earned-money" autostart="false" preload="auto">
+        <source src="sound/you-earned-money.ogg" type="audio/ogg" />
+        <source src="sound/you-earned-money.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="severe-error" autostart="false" preload="auto">
+        <source src="sound/i-am-being-serious.ogg" type="audio/ogg" />
+        <source src="sound/i-am-being-serious.mp3" type="audio/mp3" />
+    </audio>
+    {{> bundle}} {{> bot}}
+    {{> ../templates/partials/elevio }}
+    {{> gtm_iframe }}
+    <div class="notifyjs-corner" style="bottom: 0px; right: 0px;"></div>
+    <div class="notifyjs-corner" style="bottom: 0px; left: 0px;"></div>
+    </div>
 </body>
+
 </html>
