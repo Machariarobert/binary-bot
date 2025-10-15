@@ -73,7 +73,7 @@ const isRealAccount = () => {
 const getDomainAppId = () => AppIdMap[hostName.replace(/^www./, '')];
 
 export const getDefaultEndpoint = () => ({
-    url  : 'green.derivws.com',
+    url  : 'ws.derivws.com',
     appId: getStorage('config.default_app_id') || getDomainAppId() || 101096,
 });
 
