@@ -126,9 +126,27 @@ const renderElements = () => {
     }
 };
 
-const loginCheck = () => {
+export const loginCheck = () => {
     if (endpoint()) return;
     moveToDeriv();
+
+    // If we're on bot.html, always show the bot interface
+    if (window.location.pathname.includes('/bot')) {
+        loadLang();
+        $('.show-on-load').show();
+        if (getTokenList().length) {
+            document.getElementById('bot-main').classList.remove('hidden');
+        } else {
+            oauthLogin(() => {
+                $('.barspinner').hide();
+                document.getElementById('bot-main').classList.remove('hidden');
+                GTM.init();
+            });
+        }
+        return;
+    }
+
+    // For other pages (index, movetoderiv), show landing page
     if (window.location.pathname.indexOf('/bot') === -1) {
         loadLang();
     }
@@ -154,7 +172,10 @@ const loginCheck = () => {
     }
 };
 
-loginCheck();
+// Only run loginCheck on non-bot pages (index.html, movetoderiv.html)
+if (window.location.pathname.indexOf('/bot') === -1) {
+    loginCheck();
+}
 
 if (!isBinaryDomain) {
     // eslint-disable-next-line no-unused-expressions
