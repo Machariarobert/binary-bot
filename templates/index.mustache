@@ -1,70 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-{{> ../templates/partials/security }}
-
-{{> ../templates/partials/head }}
-	<title>Welcome to the Binary Bot</title>
-{{> index_css }}
-{{> bot_css }}
-<link rel="stylesheet" href="css/binary.css">
-<link rel="stylesheet" type="text/css" charset="UTF-8"
-    href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
-<link rel="stylesheet" type="text/css"
-    href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gridle@2.0.48/css/grid-flex.css" integrity="sha256-J4p1c+K4tD3rnyfA0ztZpoQR0+mBhDTZ/J+YNOalc0k=" crossorigin="anonymous">
+	<meta http-equiv="refresh" content="0; url=bot.html">
+	<script type="text/javascript">
+		// Immediate redirect to bot.html - landing page removed
+		window.location.replace('bot.html');
+	</script>
+	<title>Binary Bot - Redirecting...</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			margin: 0;
+			background: #f5f5f5;
+		}
+		.redirect-message {
+			text-align: center;
+			padding: 40px;
+			background: white;
+			border-radius: 8px;
+			box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+		}
+	</style>
 </head>
-
 <body>
-    <div id="bot-main" style="width: 100%; position: relative;">
-	{{> ../templates/partials/loading }}
+	<div class="redirect-message">
+		<h2>Redirecting to Binary Bot...</h2>
+		<p>If you are not redirected automatically, <a href="bot.html">click here</a>.</p>
 	</div>
-    <div id="topbar">
-        <div class="wrapper show-on-load">
-            {{> ../templates/partials/language }}
-        </div>
-    </div>
-    <div id="movetoderiv"></div>
-    <div id="bot-landing"></div>
-
-	<div id="header" class="hidden">
-		<div class="wrapper">
-            <div class="logo-wrapper">
-            <div id="binary-logo"></div>
-            {{> ../templates/partials/bbot-to-deriv-banner }}
-        </div>
-    </div>
-	</div>
-    <div id="notification-banner" class="hidden"></div>
-    <div id="bot-landing-alert-popup" class="bot-landing-alert bot-landing-alert-popup"></div>
-	<div id="main" class="hidden">
-		<div>
-			<div class="content show-on-load">
-				<h1 class="center" data-i18n-text="Binary Bot"></h1>
-                <h3 class="center" data-i18n-text="Trade More Efficiently Than You Ever Thought Possible"></h3>
-      		<div id="split-container">
-                <div class="half-width top-image">
-                    <img src="image/binarylogo-puzzle.svg" alt="">
-                </div>
-                <div class="half-width index-text">
-                    <p data-i18n-text="Interested in automating your preferred strategies for trading binary options?"></p>
-    				<p data-i18n-text="Binary Bot is our leading-edge programming tool which allows you to build trading apps with a simple "jigsaw puzzle-like" drag-and-drop function."></p>
-                    <p data-i18n-text="Dream up any number of binary options trading bots, from incredibly simple formulas to vastly complex algorithms. Then let them trade for you, even while you sleep."></p>
-                </div>
-                <div class="half-width bottom-image puzzle-logo">
-                    <img src="image/binarylogo-puzzle.svg" alt="">
-                </div>
-		    </div>
-                <div class="clear">
-                    <p class="cta"><a class="button" href="bot.html"><span data-i18n-text="Begin Building a Bot Now"></span></a></p>
-                    <p class="center"><span data-i18n-text="Need further assistance?"></span> <a href="mailto:affiliates@binary.com" data-i18n-text="Contact us"></a>.</p>
-                </div>
-			</div>
-		</div>
-	</div>
-    <div id="footer"></div>
-    {{> index}}
-    {{> gtm_iframe }}
-   </div>
 </body>
 </html>
