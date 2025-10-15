@@ -139,7 +139,6 @@ const Footer = () => (
                 </div>
             </div>
         </div>
-        <div id='end-note' className='invisible content-inverse-color center-text' />
     </div>
 );
 

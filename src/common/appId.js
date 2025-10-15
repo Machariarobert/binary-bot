@@ -101,8 +101,6 @@ export const getOAuthURL = () =>
 export const getOAuthURLDeriv = () =>
     `https://oauth.deriv.com/oauth2/authorize?app_id=101096&l=${getLanguage().toUpperCase()}&brand=deriv`;
 
-// 19111
-
 const options = {
     apiUrl  : getWebSocketURL(),
     language: getLanguage().toUpperCase(),

@@ -13,7 +13,6 @@ import LogTable from './LogTable';
 import NetworkMonitor from './NetworkMonitor';
 import ServerTime from './react-components/HeaderWidgets';
 import ErrorPage from './react-components/ErrorPage';
-import OfficialVersionWarning from './react-components/OfficialVersionWarning';
 import { symbolPromise } from './shared';
 import Tour from './tour';
 import TradeInfoPanel from './TradeInfoPanel';
@@ -875,14 +874,6 @@ function renderReactComponents() {
     // Always render bot components without redirect
     render(<ServerTime api={api} />, $('#server-time')[0]);
     render(<Tour />, $('#tour')[0]);
-    render(
-        <OfficialVersionWarning
-            show={
-                !(typeof window.location !== 'undefined' && isProduction() && window.location.pathname.includes('/bot'))
-            }
-        />,
-        $('#footer')[0]
-    );
     const errorArea = document.getElementById('errorArea');
     if (errorArea) errorArea.remove();
     render(<TradeInfoPanel api={api} />, $('#summaryPanel')[0]);
