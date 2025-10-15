@@ -73,8 +73,8 @@ const isRealAccount = () => {
 const getDomainAppId = () => AppIdMap[hostName.replace(/^www./, '')];
 
 export const getDefaultEndpoint = () => ({
-    url  : isRealAccount() ? 'green.binaryws.com' : 'blue.binaryws.com',
-    appId: getStorage('config.default_app_id') || getDomainAppId() || 1169,
+    url  : 'green.derivws.com',
+    appId: getStorage('config.default_app_id') || getDomainAppId() || 101096,
 });
 
 const generateOAuthDomain = () => {
@@ -96,10 +96,10 @@ export const getWebSocketURL = () => `wss://${getServerAddressFallback()}/websoc
 export const generateWebSocketURL = serverUrl => `wss://${serverUrl}/websockets/v3`;
 
 export const getOAuthURL = () =>
-    `https://${generateOAuthDomain()}/oauth2/authorize?app_id=${getAppIdFallback()}&l=${getLanguage().toUpperCase()}&brand=binary`;
+    `https://oauth.deriv.com/oauth2/authorize?app_id=${getAppIdFallback()}&l=${getLanguage().toUpperCase()}&brand=deriv`;
 
 export const getOAuthURLDeriv = () =>
-    `https://oauth.deriv.com/oauth2/authorize?app_id=31665&l=${getLanguage().toUpperCase()}&brand=deriv`;
+    `https://oauth.deriv.com/oauth2/authorize?app_id=101096&l=${getLanguage().toUpperCase()}&brand=deriv`;
 
 // 19111
 
@@ -107,7 +107,7 @@ const options = {
     apiUrl  : getWebSocketURL(),
     language: getLanguage().toUpperCase(),
     appId   : getAppIdFallback(),
-    brand   : 'binary',
+    brand   : 'deriv',
 };
 
 export const generateLiveApiInstance = () => new LiveApi(options);
