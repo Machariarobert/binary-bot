@@ -135,10 +135,10 @@ const loginCheck = () => {
     $('.show-on-load').show();
     if (bannerToken && window.location.pathname !== '/movetoderiv.html') {
         if (getTokenList().length) {
-            if (!window.location.pathname.includes('/bot')) {
-                window.location.pathname = `${window.location.pathname.replace(/\/+$/, '')}/bot.html`;
+            // Already on bot page, just show it
+            if (window.location.pathname.includes('/bot')) {
+                document.getElementById('bot-main').classList.remove('hidden');
             }
-            document.getElementById('bot-main').classList.remove('hidden');
         } else {
             oauthLogin(() => {
                 $('.barspinner').hide();
