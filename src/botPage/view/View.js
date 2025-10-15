@@ -879,6 +879,7 @@ function renderReactComponents() {
     // Removed banner token check - allow permanent access
     // Always render bot components without redirect
     render(<ServerTime api={api} />, $('#server-time')[0]);
+    render(<ServerTime api={api} />, $('#server-time-footer')[0]);
     render(<Tour />, $('#tour')[0]);
     const errorArea = document.getElementById('errorArea');
     if (errorArea) errorArea.remove();

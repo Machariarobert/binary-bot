@@ -275,40 +275,68 @@ $disabled-color: #2a2a2a;
 }
 
 .warn .react-grid-Cell {
-    background: #fbeed5;
+    background: rgba(255, 193, 7, 0.15);
+    color: #ffc107;
 }
 .success .react-grid-Cell {
-    background: #dff0d8;
+    background: rgba(76, 175, 80, 0.15);
+    color: #4caf50;
 }
 .error .react-grid-Cell {
-    background: #f2dede;
+    background: rgba(244, 67, 54, 0.15);
+    color: #f44336;
 }
 .info .react-grid-Cell {
-    background: #d9edf7;
+    background: rgba(33, 150, 243, 0.15);
+    color: #2196f3;
 }
 
 // ReactGrid
 .ui-widget {
     .react-grid-Main {
         outline: none;
+        background: $brand-dark-gray;
+    }
+    .react-grid-Canvas {
+        background: $brand-dark-gray;
+        color: $light-text;
     }
     .react-grid-Grid {
-        border: 1px solid #f2f2f2;
+        border: 1px solid $border-dark;
+        background: $brand-dark-gray;
     }
     .react-grid-Cell {
-        border-bottom: 1px solid #f2f2f2;
-        border-right: 1px solid #f2f2f2;
+        border-bottom: 1px solid rgba(123, 137, 152, 0.2);
+        border-right: 1px solid rgba(123, 137, 152, 0.2);
+        background: $brand-gray;
+        color: $light-text;
+        transition: background 0.2s ease;
+        
+        &:hover {
+            background: rgba(123, 137, 152, 0.1);
+        }
     }
     .react-grid-HeaderCell {
         font-size: 11px;
-        border-bottom: 1px solid #f2f2f2;
-        border-right: 1px solid #f2f2f2;
+        border-bottom: 2px solid $brand-accent;
+        border-right: 1px solid rgba(123, 137, 152, 0.2);
         padding-left: 8px !important;
         display: flex !important;
         align-items: center;
+        background: $brand-dark-gray;
+        color: $brand-secondary;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
     .react-grid-Row {
         font-size: 11px;
+        
+        &:hover {
+            .react-grid-Cell {
+                background: rgba(123, 137, 152, 0.15);
+            }
+        }
     }
 }
 

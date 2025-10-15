@@ -1,0 +1,31 @@
+// Bot page footer styles - matching topbar
+#footer {
+    background-color: $brand-dark-blue;
+    width: 100%;
+    color: $light-text;
+    line-height: 1;
+    font-size: 70%;
+    padding: 3px 20px;
+    display: table;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    
+    @media (max-width: 1024px) {
+        min-height: 25px !important;
+    }
+    
+    .left-footer {
+        float: left;
+    }
+    
+    .right-footer {
+        float: right;
+    }
+    
+    .right-header {
+        float: right;
+        margin-left: 10px;
+    }
+}
